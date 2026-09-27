@@ -15,7 +15,7 @@ Going beyond standard e-commerce functionality, ShooApp integrates an **AI-Power
 > **Want to see the behind-the-scenes and the app in action?** 🚀
 > I recently shared a comprehensive breakdown of the development journey, the backend N-Tier architecture, and how the AI Shopping Assistant was integrated.
 > 
-> 👉 **[Click here to watch the full video demonstration and join the discussion on LinkedIn!](BURAYA_LINKEDIN_GONDERI_LINKINI_YAPISTIR)**
+> 👉 **[Click here to watch the full video demonstration and join the discussion on LinkedIn!](https://lnkd.in/p/dEQ7dfZw)**
 
 ---
 
