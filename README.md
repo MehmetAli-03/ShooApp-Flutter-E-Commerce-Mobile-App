@@ -13,7 +13,7 @@ Going beyond standard e-commerce functionality, ShooApp integrates an **AI-Power
 ## 📢 Featured on LinkedIn
 
 > **Want to see the behind-the-scenes and the app in action?** 🚀
-> I recently shared a comprehensive breakdown of the development journey, the backend N-Tier architecture, and how the AI Shopping Assistant was integrated.
+> I recently shared a comprehensive breakdown of the development journey, the backend N-Tier architecture, state management with Cubit, and how the AI Shopping Assistant was integrated.
 > 
 > 👉 **[Click here to watch the full video demonstration and join the discussion on LinkedIn!](https://lnkd.in/p/dEQ7dfZw)**
 
@@ -26,8 +26,10 @@ The application features a built-in smart assistant. Users can type natural phra
 
 ### 📱 Mobile App (Flutter)
 * **Smart Routing:** AI-driven intent recognition for personalized shopping.
-* **State Management & Networking:** Built with **Cubit (BLoC)** and **Dio** utilizing a Feature-First architecture.
-* **Authentication:** Secure Login/Register flows with local session handling.
+* **State Management:** Reactive and predictable UI state handling using **Cubit (BLoC)**.
+* **Networking & Interceptors:** Built with **Dio** for handling API calls, automated token injection, and global error handling.
+* **Feature-First Architecture:** Modular and scalable project structure separating data and presentation layers per feature.
+* **Authentication:** Secure Login/Register flows with local JWT session handling.
 * **Product Discovery:** Advanced filtering (Price, Brand, Category) and intuitive search capabilities.
 * **User Engagement:** Detailed product pages with a star-rating and text review system.
 * **Seamless Checkout:** Complete cart management, order placement, and historical order tracking.
@@ -38,45 +40,36 @@ The application features a built-in smart assistant. Users can type natural phra
 * **Automated Mail Service:** Real-time email notifications dispatched automatically upon order creation and status updates.
 * **Comprehensive Management:** Full CRUD operations for Products, Categories, Reviews, Carts, and Orders.
 
-## 🛠️ Technology Stack
-
-| Component | Technologies Used |
-| :--- | :--- |
-| **Frontend** | Flutter, Dart, Cubit (BLoC), Dio, Shared Preferences |
-| **Backend** | ASP.NET Core Web API, C#, Entity Framework Core |
-| **Database** | SQL Server (Relational Database) |
-| **Security** | ASP.NET Core Identity, JWT Bearer Authentication |
-| **Services** | AI NLP Integration, SMTP/Email Service |
-| **Architecture**| Feature-First (Mobile), N-Tier & Repository Pattern (Backend) |
-
-## 📂 Backend Architecture Overview
-The API is divided into distinct layers to ensure maintainability and scalability:
-1.  **Core / Domain Layer:** Entities and Interfaces.
-2.  **Data Access Layer:** Entity Framework configurations, Migrations, and Repositories.
-3.  **Business / Service Layer:** Business logic, DTO mappings, and external service integrations (AI, Mail).
-4.  **API Layer:** Controllers exposing RESTful endpoints.
-
-## ⚙️ Getting Started
-
-### Prerequisites
-* [Flutter SDK](https://docs.flutter.dev/get-started/install)
-* [.NET SDK](https://dotnet.microsoft.com/download)
-* SQL Server
-
-### Setup Instructions
-1.  **Clone the repository:**
-    ```bash
-    git clone [https://github.com/MehmetAli-03/ShooApp-Flutter-E-Commerce-Mobile-App.git](https://github.com/MehmetAli-03/ShooApp-Flutter-E-Commerce-Mobile-App.git)
-    ```
-2.  **Backend Setup:**
-    * Navigate to the ASP.NET Core project folder.
-    * Update the `appsettings.json` with your SQL Server connection string and Email SMTP credentials.
-    * Run Entity Framework migrations to build the database: `dotnet ef database update`
-    * Run the API: `dotnet run`
-3.  **Frontend Setup:**
-    * Navigate to the Flutter project folder.
-    * Update `lib/core/constants/api_constants.dart` with your local API IP address.
-    * Run `flutter pub get` and build the app `flutter run`.
-
 ---
-*Architected and developed as a complete full-stack solution.*
+
+## 🏗️ Architecture & Project Structure
+
+### 📱 Mobile Architecture (Feature-First + Cubit)
+The mobile application follows a **Feature-First** pattern. Each feature contains its own data models, services, and UI presentation layer with **Cubit** managing the state transitions predictably.
+
+```text
+lib/
+├── main.dart
+│
+├── core/                                 # Global, app-wide reusable components
+│   ├── constants/                        # ApiConstants, AppColors, Endpoint paths
+│   ├── network/                          # Dio Client instance & Interceptors
+│   ├── theme/                            # App theme configurations
+│   └── widgets/                          # Common UI components (Buttons, Loaders)
+│
+└── features/                             # Modular Business Logic Features
+    ├── auth/                             # Authentication Feature
+    │   ├── data/                         # Auth Models & Auth Services
+    │   └── presentation/                 # Login/Register Pages & AuthCubit
+    │
+    ├── product/                          # Product Catalog & AI Search Feature
+    │   ├── data/                         # Product Models & API Services
+    │   └── presentation/                 # Product List, Details & ProductCubit
+    │
+    ├── cart/                             # Cart & Checkout Feature
+    │   ├── data/                         # Cart Models & Payment Services
+    │   └── presentation/                 # Cart View, Checkout & CartCubit
+    │
+    └── order/                            # Order Tracking Feature
+        ├── data/                         # Order Models & Services
+        └── presentation/                 # Order History Page & OrderCubit
